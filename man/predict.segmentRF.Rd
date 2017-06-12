@@ -4,7 +4,7 @@
 \alias{predict.segmentRF}
 \title{Predict a class useing a weighted combination of inputs}
 \usage{
-\method{predict}{segmentRF}(object, newdata, weights, thresholds = NULL, ...)
+predict.segmentRF(object, newdata, weights, thresholds = NULL, ...)
 }
 \arguments{
 \item{object}{A segmentRF model}

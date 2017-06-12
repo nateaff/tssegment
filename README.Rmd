@@ -5,10 +5,10 @@ output: github_document
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, echo = FALSE}
-knitr::opts_chunk$set(
+	knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "figures/feature-means", 
+  fig.path = "figures/feaature-means", 
   fig.width = 7.2, 
   fig.height = 4.5
   )
@@ -17,23 +17,9 @@ knitr::opts_chunk$set(
 
  
 ```{r global_options, echo = FALSE}
-knitr::opts_chunk$set(fig.align = 'center', echo=FALSE, warning=FALSE, message=FALSE, results = "hide", dev = 'png')
-library(dplyr) 
-library(beeswarm) 
-library(knitr) 
+knitr::opts_chunk$set(fig.align = 'center', echo=FALSE, warning=FALSE, message=FALSE, results = "hide", dev = 'png') 
 ```
 
 # tssegment  
 
-This package provides two main functions: One for segmenting data and another for classifying time series based on a segmented time series. The classification method uses one or more classifiers to make to make a prediction weighted by segment length. 
-
-```
-segment(df, ts, features)
-
-# S3 method for class formula
-segmentModel(formula, data=NULL, ...)
-
-segmentModel(x, y=NULL, xtest=NULL, ytest=NULL, ...)
-```
-
-
+This package provides two main functions: One for segmenting data and another for classifying time series based on a segmented time series. The classification method uses a random forest classifier to make to make a prediction weighted by segment length.

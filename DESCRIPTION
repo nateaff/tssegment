@@ -12,7 +12,7 @@ Author: Aff Nathanael <nathanaelaff@gmail.com>
 Suggests:
     testthat
 Imports:
-	ecomplex, 
-	dplyr, 
-	randomForest
-RoxygenNote: 5.0.1
+    ecomplex,
+    dplyr,
+    randomForest
+RoxygenNote: 6.0.1

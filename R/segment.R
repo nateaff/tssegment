@@ -11,6 +11,7 @@
 #'
 #' @return df A dataframe with each corresponds to the supplied function
 #'            applied to the segmented data along with the label
+#' @export
 #' @importFrom ecomplex palarm
 #' @importFrom dplyr "%>%"
 segment <- function(x, y, labels = NULL, func = mean){
@@ -45,6 +46,7 @@ segment_df <- function(df, ranges, labels = NULL, func){
   ret  
 }
 
+# Return list of ranges based on change_pts
 segment_ranges <- function(change_pts){
   starts <- change_pts[-length(change_pts)] 
   ends <- change_pts[-1]-1
@@ -52,6 +54,7 @@ segment_ranges <- function(change_pts){
   lapply(1:length(starts), function(k) starts[k]:ends[k])
 }
 
+# Add first and last point to change points
 add_end_pts <- function(x, len){
   if(!(1 %in% x)) { x <- append(x, 1)}
   if(!(len %in% x)) { x <- append(x, len)}

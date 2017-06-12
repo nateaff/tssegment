@@ -29,12 +29,10 @@ segmentRF <- function(x, ...){
 #									  each factor, \cr
 #' \code{weights} \tab The weights associated with each segment \cr
 #' }
-#' @export
 predict.segmentRF <- function(object, 
-															newdata, 
-															weights, 
-															thresholds = NULL, 
-															...){
+                              newdata,
+                              weights, 
+                              thresholds = NULL, ...){
     #assuming newdata is not a vector
     if(length(weights) != dim(newdata)[1]){
     	stop("Number of weights do not equal dimension of newdata.")
