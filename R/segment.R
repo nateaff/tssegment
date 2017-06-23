@@ -14,13 +14,16 @@
 #' @export
 #' @importFrom ecomplex palarm
 #' @importFrom dplyr "%>%"
-segment <- function(x, y, labels = NULL, func = mean){
+segment <- function(x, y, labels = NULL, func = mean, m = 5){
   if(!is.data.frame(x)) x <- data.frame(x)
   if(!is.data.frame(labels)) labels <- data.frame(labels)
+  if(is.null(dim(y))) y <- matrix(y)
   # labels <- unlist(lapply(labels, factor)) %>% data.frame
-  seg <- palarm(y)
+  segs <- apply(y, 2, palarm, m = m) 
   len <- dim(x)[1]
-  change_pts <- add_end_pts(seg$kout, len)
+  pts <- lapply(segs, function(x) x$kout)   
+  pts <- sort(unique(unlist(pts)))
+  change_pts <- add_end_pts(pts, len)
   ranges <- segment_ranges(change_pts)
   if(length(unlist(ranges))!= len){
     stop("Length of segments does not equal original length")
@@ -28,6 +31,7 @@ segment <- function(x, y, labels = NULL, func = mean){
   ret <- segment_df(x, ranges, labels, func) 
   ret 
 }
+
 
 # Apply function 'func' to segmented columns.
 # Return a data frame with weights and labels appended
@@ -60,3 +64,21 @@ add_end_pts <- function(x, len){
   if(!(len %in% x)) { x <- append(x, len)}
   sort(x)
 }
+
+
+
+# segment <- function(x, y, labels = NULL, func = mean){
+#   if(!is.data.frame(x)) x <- data.frame(x)
+#   if(!is.data.frame(labels)) labels <- data.frame(labels)
+#   # labels <- unlist(lapply(labels, factor)) %>% data.frame
+#   seg <- palarm(y)
+#   len <- dim(x)[1]
+#   change_pts <- add_end_pts(seg$kout, len)
+#   ranges <- segment_ranges(change_pts)
+#   if(length(unlist(ranges))!= len){
+#     stop("Length of segments does not equal original length")
+#   }
+#   ret <- segment_df(x, ranges, labels, func) 
+#   ret 
+# }
+
