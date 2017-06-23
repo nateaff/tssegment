@@ -1,4 +1,4 @@
-test_that("Segment helper functions output is minimall valid", {
+test_that("Segment helper functions output is minimally valid", {
 
    len = 30
    pts = c(10, 20)
