@@ -13,14 +13,16 @@
 #'            applied to the segmented data along with the label
 #' @export
 #' @importFrom ecomplex palarm
-#' @importFrom dplyr "%>%"
 segment <- function(x, y, labels = NULL, func = mean, m = 5){
   if(!is.data.frame(x)) x <- data.frame(x)
   if(!is.data.frame(labels)) labels <- data.frame(labels)
   if(is.null(dim(y))) y <- matrix(y)
-  # labels <- unlist(lapply(labels, factor)) %>% data.frame
-  segs <- apply(y, 2, palarm, m = m) 
   len <- dim(x)[1]
+  segs <- list(list(means = rep(NA, len),  kout = c(1, 120)))
+  try( segs <- apply(y, 2, palarm, m = m), 
+      silent = TRUE) 
+  
+  
   pts <- lapply(segs, function(x) x$kout)   
   pts <- sort(unique(unlist(pts)))
   change_pts <- add_end_pts(pts, len)
@@ -70,7 +72,6 @@ add_end_pts <- function(x, len){
 # segment <- function(x, y, labels = NULL, func = mean){
 #   if(!is.data.frame(x)) x <- data.frame(x)
 #   if(!is.data.frame(labels)) labels <- data.frame(labels)
-#   # labels <- unlist(lapply(labels, factor)) %>% data.frame
 #   seg <- palarm(y)
 #   len <- dim(x)[1]
 #   change_pts <- add_end_pts(seg$kout, len)
